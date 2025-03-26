@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 style="text-align: center; font-size: 2.5rem; font-weight: 800;">
+        {{ user.username|capfirst }}'s Dashboard
+    </h2>
+
+    <div class="d-flex gap-3">
+        <a href="{% url 'add_expense' %}" class="btn btn-primary">Add Expense</a>
+        <a href="{% url 'monthly' %}" class="btn btn-primary">Monthly Expense</a>
+    </div>
+
+    <table class="table mt-3 text-center">
+        <thead>
+            <tr>
+                <th>Amount</th>
+                <th>Category</th>
+                <th>Note</th>
+                <th>Date</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expense in expenses %}
+            <tr>
+                <td>₹{{ expense.amount }}</td>
+                <td>{{ expense.category }}</td>
+                <td>{% if expense.note %} {{ expense.note }} {% else %} No notes {% endif %}</td>
+                <td>{{ expense.date }}</td>
+                <td>
+                    <a href="{% url 'edit_expense' expense.id %}" class="btn btn-warning">Edit</a>
+                </td>
+                <td>
+                    <a href="{% url 'delete_expense' expense.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+</div>
+{% endblock %}

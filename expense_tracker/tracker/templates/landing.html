@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}VaultTrack{% endblock %}
+
+{% block content %}
+<style>
+    /* Remove any potential padding/margin from body & html */
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        /* Prevent scrolling */
+        height: 100%;
+        /* Ensure full height */
+    }
+
+    /* Hero section with full viewport height */
+    .hero-section {
+        background: url("{% static 'images/img.jpg' %}") no-repeat center center/cover;
+        width: 100vw;
+        /* Full width */
+        height: 100vh;
+        /* Full viewport height */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+    }
+
+    /* Dark overlay for better text contrast */
+    .overlay {
+        background: rgba(0, 0, 0, 0.5);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Ensuring text & button are above overlay */
+    .hero-content {
+        position: relative;
+        z-index: 1;
+        color: white;
+        padding: 20px;
+        /* Prevents text from touching screen edges */
+    }
+</style>
+
+<div class="hero-section">
+    <div class="overlay"></div>
+    <div class="hero-content">
+        <h1 class="mb-xl-5">"Track your expenses, control your future."</h1>
+        <p class="lead">Start managing your finances effectively today!</p>
+        <a href="{% if user.is_authenticated %}{% url 'dashboard' %}{% else %}{% url 'login' %}{% endif %}"
+            class="btn btn-primary btn-lg mt-5">
+            Get Started
+        </a>
+    </div>
+</div>
+{% endblock %}
