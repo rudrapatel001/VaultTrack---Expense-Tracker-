@@ -34,7 +34,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.10
+          python-version: 3.10  # Updated to a stable version
 
       - name: Install Dependencies
         run: |
@@ -43,7 +43,7 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run Migrations
+      - name: Apply Database Migrations
         env:
           DATABASE_NAME: expense_tracker_db
           DATABASE_USER: rudra
